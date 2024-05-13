@@ -18,6 +18,10 @@
                 <a class="nav-link" href="{{ url('companies') }}"><i class="far fa-building"></i>
                     <span>Perusahaan</span></a>
             </li>
+            <li class="{{ Request::is('attendances') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('attendances') }}"><i class="far fa-clipboard-user"></i>
+                    <span>Kehadiran</span></a>
+            </li>
 
         </ul>
 

@@ -72,7 +72,6 @@ class UserController extends Controller
         ]);
 
         //if password filled
-        //if password filled
         if ($request->password) {
             $user->update([
                 'password' => $request->password,
@@ -86,5 +85,28 @@ class UserController extends Controller
     {
         $user->delete();
         return response(['data' => $user], 200);
+    }
+
+    // Update Image & face embedded
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'face_embedding'    => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
+        }
+
+        $user   = $request->user();
+        $image  = $request->file('image');
+        $faceEmbedding = $request->face_embedding;
+
+        $image->storeAs('public/images', $image->hashName());
+        $user->image_url = $image->hashName();
+        $user->face_embedding = $faceEmbedding;
+        $user->save();
+
+        return response(['data' => $user, 'message' => "Profile Updated"], 200);
     }
 }
