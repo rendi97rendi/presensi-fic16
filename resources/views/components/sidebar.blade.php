@@ -19,8 +19,12 @@
                     <span>Perusahaan</span></a>
             </li>
             <li class="{{ Request::is('attendances') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('attendances') }}"><i class="far fa-clipboard-user"></i>
+                <a class="nav-link" href="{{ url('attendances') }}"><i class="far fa-address-book"></i>
                     <span>Kehadiran</span></a>
+            </li>
+            <li class="{{ Request::is('permissions') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('permissions') }}"><i class="far fa-envelope"></i>
+                    <span>Perizinan</span></a>
             </li>
 
         </ul>

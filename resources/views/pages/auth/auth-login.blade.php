@@ -18,12 +18,12 @@
                 @csrf
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" tabindex="1" required
-                        autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                        name="email" tabindex="1" required value="{{ old('email') }}" autofocus>
                     @error('email')
-                    <div class="invalid-feedback">
-                        {{ message }}
-                    </div>
+                        <div class="invalid-feedback">
+                            {{ message }}
+                        </div>
                     @enderror
                 </div>
 
@@ -31,17 +31,17 @@
                     <div class="d-block">
                         <label for="password" class="control-label">Password</label>
                         <div class="float-right">
-                            <a href="auth-forgot-password.html" class="text-small">
+                            <a href="#" class="text-small">
                                 lupa password?
                             </a>
                         </div>
                     </div>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2" required>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                        name="password" tabindex="2" required>
                     @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                        
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
 

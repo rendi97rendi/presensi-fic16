@@ -87,7 +87,7 @@ class UserController extends Controller
         return response(['data' => $user], 200);
     }
 
-    // Update Image & face embedded
+    // Update Image & face embedding
     public function updateProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -103,8 +103,8 @@ class UserController extends Controller
         $faceEmbedding = $request->face_embedding;
 
         $image->storeAs('public/images', $image->hashName());
-        $user->image_url = $image->hashName();
-        $user->face_embedding = $faceEmbedding;
+        $user->image_url        = $image->hashName();
+        $user->face_embedding   = $faceEmbedding;
         $user->save();
 
         return response(['data' => $user, 'message' => "Profile Updated"], 200);

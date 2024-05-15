@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Attendance;
+use App\Models\Permission;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,14 +16,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory()->create([
+            'name' => 'Administrator',
+            'email' => 'administrator@example.com',
+            'password' => Hash::make('passlogin'),
+        ]);
 
-        // User::factory()->create([
-        //     'name' => 'Rendi',
-        //     'email' => 'rendi@example.com',
-        //     'password' => Hash::make('passlogin'),
-        // ]);
-
+        User::factory()->create([
+            'name' => 'Rendi',
+            'email' => 'rendi@example.com',
+            'password' => Hash::make('passlogin'),
+        ]);
+        User::factory(10)->create();
         Attendance::factory(20)->create();
+        Permission::factory(20)->create();
     }
 }

@@ -17,7 +17,7 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::whereHas('user', function ($query) {
             $query->where('name', 'like', "%" . request('name') . '%');
-        })
+        })->where('date', date('Y-m-d'))
             ->orderBy('date', 'asc')
             ->orderBy('check_in', 'asc')
             ->paginate(10);
@@ -38,32 +38,7 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name'      => 'required|string',
-            'email'     => 'required|email|unique:attendance,email',
-            'address'   => 'nullable|string|max:255',
-            'latitude'  => 'nullable|',
-            'longitude' => 'nullable|',
-            'radius'    => 'nullable|',
-            'time_in'   => 'nullable|',
-            'time_out'  => 'nullable|',
-        ]);
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
-
-        $attendance = Attendance::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'address'   => $request->address,
-            'latitude'  => $request->latitude,
-            'longitude' => $request->longitude,
-            'radius'    => $request->radius,
-            'time_in'   => $request->time_in,
-            'time_out'  => $request->time_out,
-        ]);
-
-        return redirect()->route('attendance.index')->with('success', 'Attendance created successfully');
+        //
     }
 
     /**
@@ -88,32 +63,7 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        $validator = Validator::make($request->all(), [
-            'name'      => 'required',
-            'email'     => 'required|email|unique:attendance,email,' . $attendance->id,
-            'address'   => 'nullable|string|max:255',
-            'latitude'  => 'nullable|',
-            'longitude' => 'nullable|',
-            'radius'    => 'nullable|',
-            'time_in'   => 'nullable|',
-            'time_out'  => 'nullable|',
-        ]);
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
-
-        $attendance->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'address'   => $request->address,
-            'latitude'  => $request->latitude,
-            'longitude' => $request->longitude,
-            'radius'    => $request->radius,
-            'time_in'   => $request->time_in,
-            'time_out'  => $request->time_out,
-        ]);
-
-        return redirect()->route('attendance.index')->with('success', 'Attendance updated successfully');
+        //
     }
 
     /**

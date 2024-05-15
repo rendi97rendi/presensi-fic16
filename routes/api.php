@@ -3,10 +3,11 @@
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\ForceJsonResponse;
-use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,8 @@ Route::middleware([ForceJsonResponse::class, Cors::class, 'auth:sanctum'])->grou
         Route::post('/kehadiran/check-out', 'checkOut')->name('kehadiran.checkOut.api');
         Route::get('/kehadiran/is-checkin', 'isCheckIn')->name('kehadiran.isCheckIn.api');
     });
+
+    Route::apiResource('izin', PermissionController::class);
+
+    Route::apiResource('catatan', NoteController::class);
 });
